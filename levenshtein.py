@@ -19,9 +19,40 @@ word2 = open("source.txt").read()
 word1 = list(word1)
 word2 = list(word2)
 
+# Convert a pandas dataframe to a matplotlib figure with the columns being
+# labeled as word2 and the rows as word1
+
+def df_to_plt(df):
+    """
+    Converts a pandas dataframe to a matplotlib figure with the columns
+    being labeled as word2 and the rows as word1.
+    """
+    fig, ax = plt.subplots()
+    ax.imshow(df, cmap=plt.cm.tab20_r, interpolation='nearest')
+    ax.set_xticks(np.arange(len(df.columns)))
+    ax.xaxis.tick_top()
+    ax.set_yticks(np.arange(len(df.index)))
+    ax.set_xticklabels(df.columns)
+    ax.xaxis.set_label_position('top') 
+    ax.set_yticklabels(df.index)
+    plt.setp(ax.get_xticklabels())
+    plt.setp(ax.get_yticklabels())
+
+    # Use ax.annotate to add the numbers to the matrix
+    for i in range(len(df.index)):
+        for j in range(len(df.columns)):
+            if i == len(df.index) - 1 and j == len(df.columns) - 1:
+                ax.annotate(str(df.iloc[i, j]), (j, i), xytext=(-3,-2), textcoords='offset points', color='black', fontweight='bold')
+            else: 
+                ax.annotate(str(df.iloc[i, j]), (j, i), xytext=(-2,-2), textcoords='offset points', color='black')
+            # If the number is at the bottom right corner, make it bold
+
+    plt.tight_layout()
+    plt.show()
+    return fig
+
 # Compute the minimum edit distance between the two strings word1 and word2
 # using the Levenshtein algorithm.
-
 
 def levenshtein(str1, str2):
     """
@@ -64,10 +95,24 @@ def levenshtein(str1, str2):
 
 matrix, num = levenshtein(word1, word2)
 print("Levenshtein distance:",num)
-print(np.matrix(matrix))
-plt.imshow(matrix, cmap='tab20', interpolation='nearest')
-plt.show()
+# print(np.matrix(matrix))
+# plt.imshow(matrix, cmap='tab20', interpolation='nearest')
+# plt.show()
 
 # Convert the matrix into a pandas dataframe
-# df = pd.DataFrame(matrix)
-# print(df)
+df = pd.DataFrame(matrix)
+
+# Insert '_' at the beginning of the list word2
+word2.insert(0, '"')
+# Insert '_' at the beginning of the list word1
+word1.insert(0, '"')
+
+# Add word2 as the name of the dataframe
+df.columns = word2
+
+# Add word1 as the names of the rows
+df.index = word1
+
+print(df)
+
+df_to_plt(df).savefig('levenshtein.png')
