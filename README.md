@@ -6,7 +6,7 @@ This code also produces a visualization of the Levenshtein distance as a matrix 
 
 # The Python file
 
-It was made to compare two strings of text for plagiarism or similarity and has some color marking.
+It was made to compare two strings of text for plagiarism or similarity and has a color scheme to indicate similarities between the strings.
 
 *New color-scheme*
 
@@ -33,7 +33,7 @@ Currently only the predefined `cmap`s from matplotlib can be used. For changing 
 
 # The Jupyter Notebook
 
-It was made to analyze huge word dictionaries from the [OPTED](https://www.mso.anu.edu.au/~ralph/OPTED/). The Jupyter Notebook calculates the Levenshtein distances and the double metaphone values for a comparison of two words.
+It was made to analyze huge word dictionaries from the [OPTED](https://www.mso.anu.edu.au/~ralph/OPTED/). The Jupyter Notebook calculates the Levenshtein distances and the double metaphone values for a comparison of two words from pre-processed .CSV files extracted from the OPTED archive.
 
 ## How to use the Jupyter Notebook
 
