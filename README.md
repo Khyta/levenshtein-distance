@@ -2,7 +2,8 @@
 
 >A string metric (string similarity metric) that measure the difference between two sequences.
 
-This code also produces a visualization of the Levenshtein distance as a matrix where the bottom right number is highlighted to show the Levenshtein distance.
+- The Python file: Produces a visualization of the Levenshtein distance between two strings as a matrix.
+- The Jupyter Notebook: Computes the Levenshtein distances and double metaphone values for huge .csv word lists.
 
 # The Python file
 
